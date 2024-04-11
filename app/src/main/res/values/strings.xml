@@ -3,4 +3,8 @@
     <string name="local_dummy">내배캠동</string>
     <string name="noti_keyword_title">키워드 알림</string>
     <string name="noti_keyword_context">설정한 키워드에 대한 알림이 도착했습니다!!</string>
+    <string name="exit_title">종료</string>
+    <string name="exit_content">정말 종료하시겠습니까?</string>
+    <string name="cancel">취소</string>
+    <string name="confirm">확인</string>
 </resources>

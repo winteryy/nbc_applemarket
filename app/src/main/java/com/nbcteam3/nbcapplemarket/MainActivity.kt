@@ -5,9 +5,11 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.LinearLayout
+import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -22,11 +24,17 @@ class MainActivity : AppCompatActivity() {
     private val adapter by lazy {
         ItemListAdapter()
     }
+    private val backPressedCallBack = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            makeExitDialog()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         createNotificationChannel()
+        this.onBackPressedDispatcher.addCallback(backPressedCallBack)
 
         binding.sellingListRV.apply {
             adapter = this@MainActivity.adapter
@@ -40,6 +48,20 @@ class MainActivity : AppCompatActivity() {
         adapter.submitList(DummyRepo.getItemList())
 
 
+    }
+
+    private fun makeExitDialog() {
+        val builder = AlertDialog.Builder(this)
+            .setTitle(getString(R.string.exit_title))
+            .setMessage(getString(R.string.exit_content))
+            .setIcon(R.drawable.outline_chat_20)
+            .setNegativeButton(getString(R.string.cancel)) { dialog, _ ->
+                dialog.dismiss()
+            }
+            .setPositiveButton(getString(R.string.confirm)) { _, _ ->
+                finish()
+            }
+        builder.create().show()
     }
 
     private fun makeNotification() {
