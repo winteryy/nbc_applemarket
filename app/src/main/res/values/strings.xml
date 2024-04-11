@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">사과마켓</string>
     <string name="local_dummy">내배캠동</string>
+    <string name="noti_keyword_title">키워드 알림</string>
+    <string name="noti_keyword_context">설정한 키워드에 대한 알림이 도착했습니다!!</string>
 </resources>
