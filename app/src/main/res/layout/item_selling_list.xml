@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:padding="@dimen/padding_medium">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/imageCardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/itemImageView"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            tools:src="@drawable/ic_launcher_background" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/itemTitleTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_extra_small"
+        android:ellipsize="end"
+        android:fontFamily="sans-serif-medium"
+        android:maxLines="2"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imageCardView"
+        app:layout_constraintTop_toTopOf="@id/imageCardView"
+        tools:text="제네시스 G80제네시스 G80" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/sellerLocationTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_extra_small"
+        android:fontFamily="sans-serif-black"
+        android:textColor="@color/grey"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@id/itemTitleTextView"
+        app:layout_constraintStart_toStartOf="@id/itemTitleTextView"
+        app:layout_constraintTop_toBottomOf="@id/itemTitleTextView"
+        tools:text="해운대구 우동" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/itemPriceTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_extra_small"
+        android:layout_marginEnd="@dimen/margin_medium"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/chatNumTextView"
+        app:layout_constraintStart_toStartOf="@id/itemTitleTextView"
+        app:layout_constraintTop_toBottomOf="@id/sellerLocationTextView"
+        tools:text="48,000,000원" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/chatNumTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_smaller"
+        android:drawableStart="@drawable/outline_chat_20"
+        android:drawablePadding="2dp"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@color/grey"
+        android:textSize="@dimen/count_num_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/favoriteNumTextView"
+        tools:text="23" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/favoriteNumTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/baseline_favorite_border_20"
+        android:drawablePadding="2dp"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@color/grey"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="50" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

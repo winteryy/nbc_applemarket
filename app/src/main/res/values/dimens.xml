@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  메인  -->
+    <dimen name="main_topbar_height">80dp</dimen>
+    <dimen name="title_local_text">22sp</dimen>
+
+    <!--  아이템 뷰  -->
+    <dimen name="count_num_text">16sp</dimen>
+
+    <!--  margin  -->
+    <dimen name="margin_large">20dp</dimen>
+    <dimen name="margin_smaller">8dp</dimen>
+    <dimen name="margin_medium">16dp</dimen>
+
+    <!--  padding  -->
+    <dimen name="padding_medium">16dp</dimen>
+    <dimen name="margin_extra_small">4dp</dimen>
+</resources>
