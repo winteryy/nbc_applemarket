@@ -38,7 +38,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/imageCardView"
         app:layout_constraintTop_toTopOf="@id/imageCardView"
-        tools:text="제네시스 G80제네시스 G80" />
+        tools:text="제네시스 G80" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/sellerLocationTextView"
