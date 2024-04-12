@@ -4,7 +4,7 @@ import com.nbcteam3.nbcapplemarket.R
 import com.nbcteam3.nbcapplemarket.model.Post
 
 object DummyRepo {
-    private val itemList = listOf(
+    private var _sellingItemList = listOf(
         Post(
             id = 1,
             img = R.drawable.sample1,
@@ -116,6 +116,21 @@ object DummyRepo {
             chat = 6
         ),
     )
+    private val sellingItemList get() = _sellingItemList
 
-    fun getItemList() = itemList
+    fun getItemList() = sellingItemList
+    fun deleteItem(id: Int): Boolean {
+        val itemInd = _sellingItemList.binarySearchBy(id){
+            it.id
+        }
+
+        return if(itemInd>=0) {
+            _sellingItemList = _sellingItemList.filter {
+                it.id != id
+            }
+            true
+        } else {
+            false
+        }
+    }
 }

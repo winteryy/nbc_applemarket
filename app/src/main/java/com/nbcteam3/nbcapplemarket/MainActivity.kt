@@ -10,7 +10,6 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.LinearLayout
 import androidx.activity.OnBackPressedCallback
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
@@ -27,18 +26,30 @@ class MainActivity : AppCompatActivity() {
     private val binding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
+
     private val adapter by lazy {
-        ItemListAdapter(object : ItemListAdapter.ItemClickListener {
+        ItemListAdapter(object : ItemListAdapter.ItemTouchListener {
             override fun onClick(item: Post) {
                 startActivity(Intent(this@MainActivity, DetailActivity::class.java).apply {
                     putExtra(ITEM_DATA, item)
                 })
             }
+
+            override fun onLongClick(item: Post) {
+                makeDialog(getString(R.string.delete_title), getString(R.string.delete_content)) {
+                    if(DummyRepo.deleteItem(item.id)) {
+                        refreshList()
+                    }
+                }
+            }
         })
     }
+
     private val backPressedCallBack = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
-            makeExitDialog()
+            makeDialog(getString(R.string.exit_title), getString(R.string.exit_content)) {
+                finish()
+            }
         }
     }
 
@@ -78,6 +89,10 @@ class MainActivity : AppCompatActivity() {
             })
         }
 
+        refreshList()
+    }
+
+    private fun refreshList() {
         adapter.submitList(DummyRepo.getItemList())
     }
 
@@ -88,20 +103,6 @@ class MainActivity : AppCompatActivity() {
         binding.scrollUpFAB.setOnClickListener {
             binding.sellingListRV.smoothScrollToPosition(0)
         }
-    }
-
-    private fun makeExitDialog() {
-        val builder = AlertDialog.Builder(this)
-            .setTitle(getString(R.string.exit_title))
-            .setMessage(getString(R.string.exit_content))
-            .setIcon(R.drawable.outline_chat_20)
-            .setNegativeButton(getString(R.string.cancel)) { dialog, _ ->
-                dialog.dismiss()
-            }
-            .setPositiveButton(getString(R.string.confirm)) { _, _ ->
-                finish()
-            }
-        builder.create().show()
     }
 
     private fun makeNotification() {
