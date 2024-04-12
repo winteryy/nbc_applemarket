@@ -1,9 +1,11 @@
 package com.nbcteam3.nbcapplemarket
 
 import android.Manifest
+import android.animation.ObjectAnimator
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.LinearLayout
@@ -14,15 +16,25 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import com.nbcteam3.nbcapplemarket.data.DummyRepo
 import com.nbcteam3.nbcapplemarket.databinding.ActivityMainBinding
+import com.nbcteam3.nbcapplemarket.model.Post
+import com.nbcteam3.nbcapplemarket.util.makeDialog
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
     private val adapter by lazy {
-        ItemListAdapter()
+        ItemListAdapter(object : ItemListAdapter.ItemClickListener {
+            override fun onClick(item: Post) {
+                startActivity(Intent(this@MainActivity, DetailActivity::class.java).apply {
+                    putExtra(ITEM_DATA, item)
+                })
+            }
+        })
     }
     private val backPressedCallBack = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
@@ -36,18 +48,46 @@ class MainActivity : AppCompatActivity() {
         createNotificationChannel()
         this.onBackPressedDispatcher.addCallback(backPressedCallBack)
 
+        setRecyclerView()
+        setListeners()
+    }
+
+    private fun setRecyclerView() {
         binding.sellingListRV.apply {
             adapter = this@MainActivity.adapter
             addItemDecoration(
                 DividerItemDecoration(context, LinearLayout.VERTICAL)
             )
+            addOnScrollListener(object : OnScrollListener() {
+                private val scrollFab = binding.scrollUpFAB
+                private val fadeInAnimation = ObjectAnimator.ofFloat(scrollFab, "alpha", 0f, 1f)
+                private val fadeOutAnimation = ObjectAnimator.ofFloat(scrollFab, "alpha", 1f, 0f)
+
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    if(dy>0 && scrollFab.alpha==0F) {
+                        fadeInAnimation.start()
+                    }
+                }
+                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                    super.onScrollStateChanged(recyclerView, newState)
+                    if(!recyclerView.canScrollVertically(-1) && scrollFab.alpha==1F) {
+                        fadeOutAnimation.start()
+                    }
+                }
+            })
         }
+
+        adapter.submitList(DummyRepo.getItemList())
+    }
+
+    private fun setListeners() {
         binding.notiButton.setOnClickListener {
             makeNotification()
         }
-        adapter.submitList(DummyRepo.getItemList())
-
-
+        binding.scrollUpFAB.setOnClickListener {
+            binding.sellingListRV.smoothScrollToPosition(0)
+        }
     }
 
     private fun makeExitDialog() {
@@ -95,8 +135,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-        const val NOTIFICATION_ID = 10091
-        const val NOTIFICATION_CHANNEL_ID = "1009"
-        const val NOTIFICATION_CHANNEL_NAME = "apple_market"
+        private const val NOTIFICATION_ID = 10091
+        private const val NOTIFICATION_CHANNEL_ID = "1009"
+        private const val NOTIFICATION_CHANNEL_NAME = "apple_market"
+
+        const val ITEM_DATA = "itemData"
     }
 }

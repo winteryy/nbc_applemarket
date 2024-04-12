@@ -3,4 +3,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#7C7C7C</color>
+    <color name="light_grey">#CDCDCD</color>
+    <color name="dark_grey">#444444</color>
+    <color name="turquoise">#09847B</color>
+    <color name="theme_orange">#FD6217</color>
+    <color name="theme_orange_alpha">#CBFD6217</color>
 </resources>

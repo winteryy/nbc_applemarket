@@ -60,4 +60,21 @@
         app:layout_constraintTop_toBottomOf="@id/divideLine"
         tools:listitem="@layout/item_selling_list" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/scrollUpFAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_extra_large"
+        android:backgroundTint="@color/white"
+        android:src="@drawable/scroll_up_black"
+        android:alpha="0"
+        app:borderWidth="2dp"
+        app:fabCustomSize="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:maxImageSize="32dp"
+        app:rippleColor="@color/theme_orange_alpha"
+        app:shapeAppearanceOverlay="?attr/shapeAppearanceCornerExtraLarge"
+        tools:alpha="1" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

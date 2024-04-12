@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomBarDivideLine"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/itemImageView"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/img_height"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/sample3" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/backButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_medium"
+                android:layout_marginTop="@dimen/margin_medium"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/baseline_arrow_back_ios_new_36" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/profileImageView"
+                android:layout_width="@dimen/profile_img_size"
+                android:layout_height="@dimen/profile_img_size"
+                android:layout_marginStart="@dimen/margin_medium"
+                android:layout_marginTop="@dimen/margin_medium"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/itemImageView"
+                app:srcCompat="@drawable/profile_img" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/sellerNameTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_smaller"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/mannerTemperatureTextView"
+                app:layout_constraintStart_toEndOf="@id/profileImageView"
+                app:layout_constraintTop_toTopOf="@id/profileImageView"
+                tools:text="코코유" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/sellerLocationTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/dark_grey"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/sellerNameTextView"
+                app:layout_constraintStart_toStartOf="@id/sellerNameTextView"
+                app:layout_constraintTop_toBottomOf="@id/sellerNameTextView"
+                tools:text="수성구 범어동" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/mannerSmileImageView"
+                android:layout_width="@dimen/manner_smile_img_size"
+                android:layout_height="@dimen/manner_smile_img_size"
+                android:layout_marginEnd="@dimen/margin_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/profileImageView"
+                app:srcCompat="@drawable/smile_face" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/mannerTemperatureTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_small"
+                android:letterSpacing="-0.04"
+                android:text="@string/manner_temperature"
+                android:textColor="@color/turquoise"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/mannerSmileImageView"
+                app:layout_constraintEnd_toStartOf="@id/mannerSmileImageView"
+                app:layout_constraintTop_toTopOf="@id/mannerSmileImageView" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/mannerTemperatureHintTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/manner_temperature_hint"
+                android:textColor="@color/grey"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@id/profileImageView"
+                app:layout_constraintEnd_toEndOf="@id/mannerSmileImageView" />
+
+            <View
+                android:id="@+id/divideLine"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:background="@color/light_grey"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/profileImageView" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/itemTitleTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_medium"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divideLine"
+                tools:text="샤넬 카드지갑" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/itemContentTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@id/itemTitleTextView"
+                app:layout_constraintStart_toStartOf="@id/itemTitleTextView"
+                app:layout_constraintTop_toBottomOf="@id/itemTitleTextView"
+                tools:text="고퀄지갑이구요\n사용감이 있어서 싸게 내어둡니다" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <View
+        android:id="@+id/bottomBarDivideLine"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/margin_large"
+        app:layout_constraintBottom_toTopOf="@id/favoriteButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/favoriteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/margin_large"
+        android:padding="@dimen/padding_extra_small"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/baseline_favorite_border_26_black" />
+
+    <View
+        android:id="@+id/favoriteVerticalDivideLine"
+        android:layout_width="2dp"
+        android:layout_height="0dp"
+        android:layout_marginVertical="@dimen/margin_small"
+        android:layout_marginStart="@dimen/margin_medium"
+        android:background="@color/light_grey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/favoriteButton"
+        app:layout_constraintTop_toBottomOf="@id/bottomBarDivideLine" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/priceTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_medium"
+        android:maxLines="1"
+        android:fontFamily="sans-serif-black"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/favoriteVerticalDivideLine"
+        app:layout_constraintTop_toBottomOf="@id/bottomBarDivideLine"
+        app:layout_constraintEnd_toStartOf="@id/chatButton"
+        tools:text="180,000원" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/chatButton"
+        style="@style/Theme.NbcApplemarket.ThemeButton"
+        android:layout_width="wrap_content"
+        android:layout_marginEnd="@dimen/margin_medium"
+        android:text="@string/chat_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bottomBarDivideLine" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

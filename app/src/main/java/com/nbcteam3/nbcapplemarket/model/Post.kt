@@ -1,5 +1,9 @@
 package com.nbcteam3.nbcapplemarket.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Post(
     val id: Int,
     val img: Int, //원래는 URL String
@@ -10,4 +14,4 @@ data class Post(
     val location: String,
     val favorite: Int,
     val chat: Int
-)
+): Parcelable

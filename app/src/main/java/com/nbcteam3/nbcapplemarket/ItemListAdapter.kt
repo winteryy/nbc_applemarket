@@ -10,7 +10,11 @@ import com.nbcteam3.nbcapplemarket.databinding.ItemSellingListBinding
 import com.nbcteam3.nbcapplemarket.model.Post
 import com.nbcteam3.nbcapplemarket.util.toPriceText
 
-class ItemListAdapter(): ListAdapter<Post, ItemListAdapter.ItemViewHolder>(DIFF_UTIL) {
+class ItemListAdapter(private val itemClickListener: ItemClickListener): ListAdapter<Post, ItemListAdapter.ItemViewHolder>(DIFF_UTIL) {
+
+    interface ItemClickListener {
+        fun onClick(item: Post)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         return ItemViewHolder(
@@ -36,6 +40,9 @@ class ItemListAdapter(): ListAdapter<Post, ItemListAdapter.ItemViewHolder>(DIFF_
                 itemPriceTextView.text = post.price.toPriceText()
                 chatNumTextView.text = post.chat.toString()
                 favoriteNumTextView.text = post.favorite.toString()
+                root.setOnClickListener {
+                    itemClickListener.onClick(post)
+                }
             }
         }
     }
