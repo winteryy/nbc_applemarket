@@ -3,7 +3,6 @@ package com.nbcteam3.nbcapplemarket
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import coil.load
@@ -87,7 +86,6 @@ class DetailActivity: AppCompatActivity() {
 
     private fun setResult() {
         val intent = Intent().putExtra(MainActivity.NEED_TO_REFRESH, updateFavoriteState())
-        Log.d("DetailActivity", "${intent.getBooleanExtra(MainActivity.NEED_TO_REFRESH, false)}")
         setResult(RESULT_OK, intent)
         finish()
     }

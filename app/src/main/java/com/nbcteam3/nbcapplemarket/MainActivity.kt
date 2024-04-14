@@ -8,10 +8,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import android.widget.LinearLayout
 import androidx.activity.OnBackPressedCallback
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -82,19 +80,17 @@ class MainActivity : AppCompatActivity() {
             )
             addOnScrollListener(object : OnScrollListener() {
                 private val scrollFab = binding.scrollUpFAB
-                private val fadeInAnimation = ObjectAnimator.ofFloat(scrollFab, "alpha", 0f, 1f)
-                private val fadeOutAnimation = ObjectAnimator.ofFloat(scrollFab, "alpha", 1f, 0f)
 
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                     super.onScrolled(recyclerView, dx, dy)
                     if(dy>0 && scrollFab.alpha==0F) {
-                        fadeInAnimation.start()
+                        ObjectAnimator.ofFloat(scrollFab, "alpha", 0f, 1f).start()
                     }
                 }
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                     super.onScrollStateChanged(recyclerView, newState)
                     if(!recyclerView.canScrollVertically(-1) && scrollFab.alpha==1F) {
-                        fadeOutAnimation.start()
+                        ObjectAnimator.ofFloat(scrollFab, "alpha", 1f, 0f).start()
                     }
                 }
             })
