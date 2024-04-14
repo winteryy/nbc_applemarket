@@ -67,26 +67,42 @@
         app:layout_constraintTop_toBottomOf="@id/sellerLocationTextView"
         tools:text="48,000,000원" />
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/chatNumImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/outline_chat_20"
+        android:layout_marginEnd="@dimen/margin_extra_smaller"
+        app:layout_constraintEnd_toStartOf="@id/chatNumTextView"
+        app:layout_constraintTop_toTopOf="@id/chatNumTextView"
+        app:layout_constraintBottom_toBottomOf="@id/chatNumTextView" />
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/chatNumTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_smaller"
-        android:drawableStart="@drawable/outline_chat_20"
-        android:drawablePadding="2dp"
         android:fontFamily="sans-serif-medium"
         android:textColor="@color/grey"
         android:textSize="@dimen/count_num_text"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/favoriteNumTextView"
+        app:layout_constraintEnd_toStartOf="@id/favoriteNumImageView"
         tools:text="23" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/favoriteNumImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/baseline_favorite_border_20"
+        android:layout_marginEnd="@dimen/margin_extra_smaller"
+        app:layout_constraintEnd_toStartOf="@id/favoriteNumTextView"
+        app:layout_constraintTop_toTopOf="@id/favoriteNumTextView"
+        app:layout_constraintBottom_toBottomOf="@id/favoriteNumTextView" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/favoriteNumTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableStart="@drawable/baseline_favorite_border_20"
-        android:drawablePadding="2dp"
         android:fontFamily="sans-serif-medium"
         android:textColor="@color/grey"
         android:textSize="16sp"

@@ -12,6 +12,7 @@ data class Post(
     val seller: String,
     val price: Int,
     val location: String,
-    val favorite: Int,
-    val chat: Int
+    val favoriteNum: Int,
+    val chatNum: Int,
+    val isFavorite: Boolean
 ): Parcelable

@@ -13,8 +13,9 @@ object DummyRepo {
             seller = "대현동",
             price = 1000,
             location = "서울 서대문구 창천동",
-            favorite = 13,
-            chat = 25
+            favoriteNum = 13,
+            chatNum = 25,
+            isFavorite = false
         ),
         Post(
             id = 2,
@@ -24,8 +25,9 @@ object DummyRepo {
             seller = "안마담",
             price = 20000,
             location = "인천 계양구 귤현동",
-            favorite = 8,
-            chat = 28
+            favoriteNum = 8,
+            chatNum = 28,
+            isFavorite = false
         ),
         Post(
             id = 3,
@@ -35,8 +37,9 @@ object DummyRepo {
             seller = "코코유",
             price = 10000,
             location = "수성구 범어동",
-            favorite = 23,
-            chat = 5
+            favoriteNum = 23,
+            chatNum = 5,
+            isFavorite = false
         ),
         Post(
             id = 4,
@@ -46,8 +49,9 @@ object DummyRepo {
             seller = "니콜",
             price = 10000,
             location = "해운대구 우제2동",
-            favorite = 14,
-            chat = 17
+            favoriteNum = 14,
+            chatNum = 17,
+            isFavorite = false
         ),
         Post(
             id = 5,
@@ -57,8 +61,9 @@ object DummyRepo {
             seller = "절명",
             price = 150000,
             location = "연제구 연산제8동",
-            favorite = 22,
-            chat = 9
+            favoriteNum = 22,
+            chatNum = 9,
+            isFavorite = false
         ),
         Post(
             id = 6,
@@ -68,8 +73,9 @@ object DummyRepo {
             seller = "미니멀하게",
             price = 50000,
             location = "수원시 영통구 원천동",
-            favorite = 25,
-            chat = 16
+            favoriteNum = 25,
+            chatNum = 16,
+            isFavorite = false
         ),
         Post(
             id = 7,
@@ -79,8 +85,9 @@ object DummyRepo {
             seller = "굿리치",
             price = 150000,
             location = "남구 옥동",
-            favorite = 142,
-            chat = 54
+            favoriteNum = 142,
+            chatNum = 54,
+            isFavorite = false
         ),
         Post(
             id = 8,
@@ -90,8 +97,9 @@ object DummyRepo {
             seller = "난쉽",
             price = 180000,
             location = "동래구 온천제2동",
-            favorite = 31,
-            chat = 7
+            favoriteNum = 31,
+            chatNum = 7,
+            isFavorite = false
         ),
         Post(
             id = 9,
@@ -101,8 +109,9 @@ object DummyRepo {
             seller = "알뜰한",
             price = 30000,
             location = "원주시 명륜2동",
-            favorite = 7,
-            chat = 28
+            favoriteNum = 7,
+            chatNum = 28,
+            isFavorite = false
         ),
         Post(
             id = 10,
@@ -112,8 +121,9 @@ object DummyRepo {
             seller = "똑태현",
             price = 190000,
             location = "중구 동화동",
-            favorite = 40,
-            chat = 6
+            favoriteNum = 40,
+            chatNum = 6,
+            isFavorite = false
         ),
     )
     private val sellingItemList get() = _sellingItemList
@@ -132,5 +142,17 @@ object DummyRepo {
         } else {
             false
         }
+    }
+    fun updateItem(post: Post): Boolean {
+        var flag = false
+        _sellingItemList = _sellingItemList.map {
+            if(it.id == post.id) {
+                flag = true
+                post
+            }else {
+                it
+            }
+        }
+        return flag
     }
 }

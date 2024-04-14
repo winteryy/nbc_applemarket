@@ -8,8 +8,11 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.widget.LinearLayout
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
@@ -23,6 +26,12 @@ import com.nbcteam3.nbcapplemarket.model.Post
 import com.nbcteam3.nbcapplemarket.util.makeDialog
 
 class MainActivity : AppCompatActivity() {
+    private val detailActivityLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        if(it.resultCode == RESULT_OK && it.data?.getBooleanExtra(NEED_TO_REFRESH, false)==true) {
+            refreshList()
+        }
+    }
+
     private val binding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
@@ -30,9 +39,11 @@ class MainActivity : AppCompatActivity() {
     private val adapter by lazy {
         ItemListAdapter(object : ItemListAdapter.ItemTouchListener {
             override fun onClick(item: Post) {
-                startActivity(Intent(this@MainActivity, DetailActivity::class.java).apply {
-                    putExtra(ITEM_DATA, item)
-                })
+                detailActivityLauncher.launch(
+                    Intent(this@MainActivity, DetailActivity::class.java).apply {
+                        putExtra(ITEM_DATA, item)
+                    }
+                )
             }
 
             override fun onLongClick(item: Post) {
@@ -140,6 +151,7 @@ class MainActivity : AppCompatActivity() {
         private const val NOTIFICATION_CHANNEL_ID = "1009"
         private const val NOTIFICATION_CHANNEL_NAME = "apple_market"
 
+        const val NEED_TO_REFRESH = "needToRefresh"
         const val ITEM_DATA = "itemData"
     }
 }

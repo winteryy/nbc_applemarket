@@ -37,11 +37,14 @@ class ItemListAdapter(private val itemTouchListener: ItemTouchListener): ListAda
         fun onBind(post: Post) {
             binding.apply {
                 itemImageView.load(post.img)
+                favoriteNumImageView.load(
+                    if(post.isFavorite) R.drawable.baseline_favorite_20_red else R.drawable.baseline_favorite_border_20
+                )
                 itemTitleTextView.text = post.title
                 sellerLocationTextView.text = post.location
                 itemPriceTextView.text = post.price.toPriceText()
-                chatNumTextView.text = post.chat.toString()
-                favoriteNumTextView.text = post.favorite.toString()
+                chatNumTextView.text = post.chatNum.toString()
+                favoriteNumTextView.text = post.favoriteNum.toString()
                 root.setOnClickListener {
                     itemTouchListener.onClick(post)
                 }
