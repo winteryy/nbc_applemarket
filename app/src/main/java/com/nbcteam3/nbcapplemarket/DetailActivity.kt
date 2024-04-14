@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import coil.load
+import com.google.android.material.snackbar.Snackbar
 import com.nbcteam3.nbcapplemarket.data.DummyRepo
 import com.nbcteam3.nbcapplemarket.databinding.ActivityDetailBinding
 import com.nbcteam3.nbcapplemarket.model.Post
@@ -28,7 +29,7 @@ class DetailActivity: AppCompatActivity() {
 
     private val backPressedCallBack = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
-            setResult()
+            readyToFinish()
             finish()
         }
     }
@@ -43,7 +44,7 @@ class DetailActivity: AppCompatActivity() {
         }
 
         binding.backButton.setOnClickListener {
-            setResult()
+            readyToFinish()
             finish()
         }
     }
@@ -54,6 +55,9 @@ class DetailActivity: AppCompatActivity() {
         changeFavoriteState()
         favoriteButton.setOnClickListener {
             favoriteState = !favoriteState
+            if(favoriteState) {
+                Snackbar.make(it, getString(R.string.set_favorite), Snackbar.LENGTH_SHORT).show()
+            }
             changeFavoriteState()
         }
         itemTitleTextView.text = post.title
@@ -67,6 +71,7 @@ class DetailActivity: AppCompatActivity() {
         binding.favoriteButton.load(
             if(favoriteState) R.drawable.baseline_favorite_26_red else R.drawable.baseline_favorite_border_26_black
         )
+
     }
 
     private fun updateFavoriteState(): Boolean {
@@ -84,9 +89,8 @@ class DetailActivity: AppCompatActivity() {
         return false
     }
 
-    private fun setResult() {
+    private fun readyToFinish() {
         val intent = Intent().putExtra(MainActivity.NEED_TO_REFRESH, updateFavoriteState())
         setResult(RESULT_OK, intent)
-        finish()
     }
 }
