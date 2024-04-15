@@ -8,4 +8,5 @@
     <color name="turquoise">#09847B</color>
     <color name="theme_orange">#FD6217</color>
     <color name="theme_orange_alpha">#CBFD6217</color>
+    <color name="ic_launcher_background">#FFF4E4</color>
 </resources>

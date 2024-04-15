@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
             if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.POST_NOTIFICATIONS)) {
                 makeDialog(getString(R.string.request_permission_title),
                     getString(R.string.request_permission_msg)) {
-                    requestCameraPermission()
+                    requestNotificationPermission()
                 }
             }else {
                 Snackbar.make(
@@ -135,7 +135,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun requestCameraPermission() {
+    private fun requestNotificationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.POST_NOTIFICATIONS),
                 REQUEST_NOTIFICATION_PERMISSION_CODE)
