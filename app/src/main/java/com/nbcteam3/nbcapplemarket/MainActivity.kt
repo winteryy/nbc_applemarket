@@ -7,6 +7,7 @@ import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.widget.LinearLayout
 import androidx.activity.OnBackPressedCallback
@@ -18,6 +19,7 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener
+import com.google.android.material.snackbar.Snackbar
 import com.nbcteam3.nbcapplemarket.data.DummyRepo
 import com.nbcteam3.nbcapplemarket.databinding.ActivityMainBinding
 import com.nbcteam3.nbcapplemarket.model.Post
@@ -27,6 +29,27 @@ class MainActivity : AppCompatActivity() {
     private val detailActivityLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         if(it.resultCode == RESULT_OK && it.data?.getBooleanExtra(NEED_TO_REFRESH, false)==true) {
             refreshList()
+        }
+    }
+
+    private val notificationPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        if(isGranted) {
+            makeNotification()
+        }else {
+            if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.POST_NOTIFICATIONS)) {
+                makeDialog(getString(R.string.request_permission_title),
+                    getString(R.string.request_permission_msg)) {
+                    requestCameraPermission()
+                }
+            }else {
+                Snackbar.make(
+                    binding.root,
+                    getString(R.string.noti_failure_no_permission),
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 
@@ -112,28 +135,39 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun makeNotification() {
-        val notificationBuilder = NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
-            .setContentTitle(getString(R.string.noti_keyword_title))
-            .setContentText(getString(R.string.noti_keyword_context))
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.POST_NOTIFICATIONS
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return
+    private fun requestCameraPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                REQUEST_NOTIFICATION_PERMISSION_CODE)
         }
-        NotificationManagerCompat.from(this).notify(NOTIFICATION_ID, notificationBuilder.build())
+    }
+
+    private fun makeNotification() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) == PackageManager.PERMISSION_GRANTED
+            ) {
+                val notificationBuilder = NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
+                    .setContentTitle(getString(R.string.noti_keyword_title))
+                    .setContentText(getString(R.string.noti_keyword_context))
+                    .setSmallIcon(R.drawable.apple)
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+
+                NotificationManagerCompat.from(this).notify(NOTIFICATION_ID, notificationBuilder.build())
+            } else {
+                notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+            }
+        } else {
+            val notificationBuilder = NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
+                .setContentTitle(getString(R.string.noti_keyword_title))
+                .setContentText(getString(R.string.noti_keyword_context))
+                .setSmallIcon(R.drawable.apple)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+
+            NotificationManagerCompat.from(this).notify(NOTIFICATION_ID, notificationBuilder.build())
+        }
     }
 
     private fun createNotificationChannel() {
@@ -146,6 +180,7 @@ class MainActivity : AppCompatActivity() {
         private const val NOTIFICATION_ID = 10091
         private const val NOTIFICATION_CHANNEL_ID = "1009"
         private const val NOTIFICATION_CHANNEL_NAME = "apple_market"
+        private const val REQUEST_NOTIFICATION_PERMISSION_CODE = 1
 
         const val NEED_TO_REFRESH = "needToRefresh"
         const val ITEM_DATA = "itemData"
