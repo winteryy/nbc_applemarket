@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".MainActivity">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/localNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_large"
+        android:text="@string/local_dummy"
+        android:textColor="@color/black"
+        android:textSize="@dimen/title_local_text"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/divideLine"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/dropdownButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/localNameTextView"
+        app:layout_constraintStart_toEndOf="@id/localNameTextView"
+        app:layout_constraintTop_toTopOf="@id/localNameTextView"
+        app:srcCompat="@drawable/baseline_keyboard_arrow_down_32" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/notiButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_large"
+        app:layout_constraintBottom_toTopOf="@id/divideLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/baseline_notifications_none_40"
+        tools:ignore="RtlSymmetry" />
+
+    <View
+        android:id="@+id/divideLine"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/main_topbar_height"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/sellingListRV"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divideLine"
+        tools:listitem="@layout/item_selling_list" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/scrollUpFAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_extra_large"
+        android:backgroundTint="@color/white"
+        android:src="@drawable/scroll_up_black"
+        android:alpha="0"
+        app:borderWidth="2dp"
+        app:fabCustomSize="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:maxImageSize="32dp"
+        app:rippleColor="@color/theme_orange_alpha"
+        app:shapeAppearanceOverlay="?attr/shapeAppearanceCornerExtraLarge"
+        tools:alpha="1" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

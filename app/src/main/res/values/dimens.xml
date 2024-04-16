@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  메인  -->
+    <dimen name="main_topbar_height">72dp</dimen>
+    <dimen name="title_local_text">22sp</dimen>
+
+    <!--  아이템 뷰  -->
+    <dimen name="count_num_text">16sp</dimen>
+    <dimen name="item_img_size">120dp</dimen>
+
+    <!--  디테일  -->
+    <dimen name="manner_smile_img_size">32dp</dimen>
+    <dimen name="profile_img_size">56dp</dimen>
+    <dimen name="img_height">300dp</dimen>
+
+    <!--  margin  -->
+    <dimen name="margin_extra_large">24dp</dimen>
+    <dimen name="margin_large">20dp</dimen>
+    <dimen name="margin_medium">16dp</dimen>
+    <dimen name="margin_small">12dp</dimen>
+    <dimen name="margin_smaller">8dp</dimen>
+    <dimen name="margin_extra_small">4dp</dimen>
+    <dimen name="margin_extra_smaller">4dp</dimen>
+
+    <!--  padding  -->
+    <dimen name="padding_large">20dp</dimen>
+    <dimen name="padding_medium">16dp</dimen>
+    <dimen name="padding_extra_small">4dp</dimen>
+    <dimen name="padding_extra_smaller">2dp</dimen>
+
+</resources>
