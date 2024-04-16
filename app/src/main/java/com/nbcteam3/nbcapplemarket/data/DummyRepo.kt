@@ -129,7 +129,9 @@ object DummyRepo {
     private val sellingItemList get() = _sellingItemList
 
     fun getItemList() = sellingItemList
+
     fun deleteItem(id: Int): Boolean {
+        //삭제할 id 존재하는 지 확인
         val itemInd = _sellingItemList.binarySearchBy(id){
             it.id
         }
@@ -143,6 +145,7 @@ object DummyRepo {
             false
         }
     }
+
     fun updateItem(post: Post): Boolean {
         var flag = false
         _sellingItemList = _sellingItemList.map {

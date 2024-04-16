@@ -20,6 +20,7 @@ class DetailActivity: AppCompatActivity() {
     private var favoriteState = false
 
     private val post by lazy {
+        //버전 처리
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             intent.getParcelableExtra(MainActivity.ITEM_DATA, Post::class.java)
         }else {
@@ -49,16 +50,22 @@ class DetailActivity: AppCompatActivity() {
         }
     }
 
+    /**
+     * Post 데이터를 DetailActivity의 뷰에 바인딩
+     *
+     * @param post      MainActivity로부터 받은 Post 데이터
+     */
     private fun ActivityDetailBinding.bindPost(post: Post) {
         itemImageView.load(post.img)
         favoriteState = post.isFavorite
-        changeFavoriteState()
+        changeFavoriteStateImage()
         favoriteButton.setOnClickListener {
+            //좋아요 버튼 클릭 리스너
             favoriteState = !favoriteState
             if(favoriteState) {
                 Snackbar.make(it, getString(R.string.set_favorite), Snackbar.LENGTH_SHORT).show()
             }
-            changeFavoriteState()
+            changeFavoriteStateImage()
         }
         itemTitleTextView.text = post.title
         itemContentTextView.text = post.content
@@ -67,13 +74,23 @@ class DetailActivity: AppCompatActivity() {
         priceTextView.text = post.price.toPriceText()
     }
 
-    private fun changeFavoriteState() {
+    /**
+     * 좋아요 버튼 눌렸을 때, 좋아요 버튼의 동적인 UI 변화
+     * 좋아요 상태일 시 붉은색 하트, 좋아요 상태 아닐 시 빈 하트
+     */
+    private fun changeFavoriteStateImage() {
         binding.favoriteButton.load(
             if(favoriteState) R.drawable.baseline_favorite_26_red else R.drawable.baseline_favorite_border_26_black
         )
 
     }
 
+    /**
+     * 임시로 저장해 두었던 좋아요 상태를 DummyRepo에 업데이트
+     * 기존의 좋아요 상태와 달라졌을 때만 업데이트
+     *
+     * @return Boolean | 업데이트가 발생했다면 true 리턴, 발생하지 않았다면 false 리턴
+     */
     private fun updateFavoriteState(): Boolean {
         if(post==null) return false
         val originPost = post!!
@@ -89,6 +106,10 @@ class DetailActivity: AppCompatActivity() {
         return false
     }
 
+    /**
+     * MainActivity에 업데이트 발생여부 전달 준비
+     * UI 상의 back button 클릭 시, 유저가 뒤로 가기 할 시 호출
+     */
     private fun readyToFinish() {
         val intent = Intent().putExtra(MainActivity.NEED_TO_REFRESH, updateFavoriteState())
         setResult(RESULT_OK, intent)

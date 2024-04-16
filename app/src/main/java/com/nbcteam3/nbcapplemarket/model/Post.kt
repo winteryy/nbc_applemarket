@@ -14,5 +14,5 @@ data class Post(
     val location: String,
     val favoriteNum: Int,
     val chatNum: Int,
-    val isFavorite: Boolean
+    val isFavorite: Boolean //좋아요 기능 용도
 ): Parcelable
